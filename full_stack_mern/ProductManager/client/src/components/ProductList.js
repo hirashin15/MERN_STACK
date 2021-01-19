@@ -1,12 +1,31 @@
 import React from 'react';
-import { Link } from '@reach/router'
+import { Link, navigate } from '@reach/router';
+import axios from 'axios';
 
 export default props => {
-  const { products } = props;
-  console.log(products)
+  const { products, removeFromDom } = props;
+  const deleteProduct = (id) => {
+    axios.delete('http://localhost:8000/api/product/' + id)
+      .then(res => {
+        removeFromDom(id)
+      })
+  }
 
   const productList = products.map((item, i) => {
-    return <Link to={`/product/${item._id}`}><p key={i}>{item.title}</p></Link>
+    return (
+      <p key={i}>
+        <Link to={`/product/${item._id}`}>
+          {item.title}
+        </Link>
+
+        <button onClick={(e) => navigate(`/product/${item._id}/edit`)}>
+          Edit
+        </button>
+        <button onClick={(e) => { deleteProduct(item._id) }}>
+          Delete
+        </button>
+      </p>
+    )
   })
 
   return (
