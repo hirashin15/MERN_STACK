@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, navigate } from '@reach/router';
 import axios from 'axios';
+import DeleteButton from '../components/DeleteButton';
 export default props => {
   const [product, setProduct] = useState({})
   useEffect(() => {
@@ -8,13 +9,13 @@ export default props => {
       .then(res => setProduct(res.data))
   }, [])
 
-  const deleteProduct = (id) => {
-    axios.delete('http://localhost:8000/api/product/' + id)
-      .then(res => {
-        // removeFromDom(id)
-        navigate('/product')
-      })
-  }
+  // const deleteProduct = (id) => {
+  //   axios.delete('http://localhost:8000/api/product/' + id)
+  //     .then(res => {
+  //       // removeFromDom(id)
+  //       navigate('/product')
+  //     })
+  // }
 
 
   return (
@@ -29,9 +30,10 @@ export default props => {
       <button onClick={(e) => navigate(`/product/${product._id}/edit`)}>
         Edit
       </button>
-      <button onClick={(e) => { deleteProduct(product._id) }}>
+      {/* <button onClick={(e) => { deleteProduct(product._id) }}>
         Delete
-      </button>
+      </button> */}
+      <DeleteButton productId={product._id} successCallback={() => navigate('/product')} />
 
     </div >
   )
