@@ -1,0 +1,18 @@
+{
+  "folders": [
+	{
+		"name": "Mern-eCommerce",
+		"uri": "vsls:/"
+	}
+],
+  "settings": {
+    "files.hotExit": "off",
+    "vsliveshare.join.reload.workspaceId": "1BD256A6AED51EE2C63493565FB4D338919B",
+    "vsliveshare.join.reload.workspaceFolder": "C:\\Users\\hira\\AppData\\Local\\Temp\\vsliveshare\\tmp-1BD256A6AED51EE2C63493565FB4D338919B",
+    "vsliveshare.join.correlationId": "",
+    "extensions.ignoreRecommendations": true,
+    "npm.autoDetect": "off",
+    "debug.allowBreakpointsEverywhere": true,
+    "html.autoClosingTags": false
+  }
+}
