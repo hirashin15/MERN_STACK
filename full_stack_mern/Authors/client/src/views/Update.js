@@ -8,6 +8,7 @@ const Update = props => {
   const { id } = props;
   const [author, setAuthor] = useState("")
   const [loaded, setLoaded] = useState(false)
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:8000/api/author/" + id)
@@ -21,16 +22,22 @@ const Update = props => {
   const updateAuthor = (auth) => {
     axios.put("http://localhost:8000/api/author/" + id, auth)
       .then(() => navigate("/"))
-      .catch(err => console.log(err))
+      .catch(err => {
+        const errResponse = err.response.data.errors;
+        const errorArr = [];
+        for (const key of Object.keys(errResponse)) {
+          errorArr.push(errResponse[key].message)
+        }
+        setErrors(errorArr);
+      })
   }
-  console.log(author)
 
   return (
     <div>
       <Header />
       <Link to={'/'}>Home</Link>
       <p style={{ color: 'purple' }}>Edit this author: </p>
-      {loaded && <AuthorForm initialFirstName={author.firstName} initialLastName={author.lastName} onSubmitFunction={updateAuthor} />}
+      {loaded && <AuthorForm initialFirstName={author.firstName} initialLastName={author.lastName} onSubmitFunction={updateAuthor} errors={errors} />}
       <button onClick={() => navigate('/')}>Cancel</button>
     </div>
   )
